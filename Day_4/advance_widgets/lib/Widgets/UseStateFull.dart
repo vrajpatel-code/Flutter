@@ -1,6 +1,8 @@
+// ignore: file_names
 import 'package:advance_widgets/Widgets/StackUse.dart';
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class myData {
   final String key;
   final dynamic value;
@@ -15,15 +17,14 @@ class myData {
   });
 }
 
-class Usingmap extends StatelessWidget {
-  Usingmap({super.key});
+class UseStateFull extends StatefulWidget {
+  const UseStateFull({super.key});
 
-  // Map<String, dynamic> mapD = {
-  //   "NAME": "VRAJ",
-  //   "ID": "24CP311",
-  //   "CITY": "ANAND",
-  //   "CGPA": 7.8,
-  // };
+  @override
+  State<UseStateFull> createState() => _UseStateFullState();
+}
+
+class _UseStateFullState extends State<UseStateFull> {
 
   List<myData> dataList = [
     myData(key: "NAME", value: "VRAJ", icon: Icons.person, iseditable: true),
@@ -31,15 +32,24 @@ class Usingmap extends StatelessWidget {
     myData(key: "CITY", value: "ANAND", icon: Icons.location_city),
     myData(key: "CGPA", value: 7.8, icon: Icons.school),
   ];
+  // ignore: non_constant_identifier_names
   var Kstyle = TextStyle(
     fontSize: 15,
     color: Colors.black,
     fontWeight: FontWeight.bold,
   );
+  // ignore: non_constant_identifier_names
   var Vstyle = TextStyle(fontSize: 15, color: Colors.white);
+
+  void refreshData() {
+    setState(() {
+      dataList = [...dataList, myData(key: "SEM", value: 6, icon: Icons.book)];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -50,7 +60,6 @@ class Usingmap extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 5,
         children: [
-          
           StackUse(),
           ...dataList.map(
             (data) => Container(
@@ -59,7 +68,7 @@ class Usingmap extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: const Color.fromARGB(181, 29, 27, 94)!,
+                  color: const Color.fromARGB(181, 29, 27, 94),
                   width: 2,
                 ),
                 color: Colors.blue[700],
@@ -90,7 +99,7 @@ class Usingmap extends StatelessWidget {
             ),
           ),
           OutlinedButton(
-            onPressed: () {},
+            onPressed: refreshData,
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.green[900],
               side: BorderSide(color: Colors.green[900]!, width: 2),
